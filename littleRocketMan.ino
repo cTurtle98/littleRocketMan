@@ -1,7 +1,8 @@
-/* CIARAN FARLEY
- *  Rocket Data Logger
- *  v 0.1
- */
+/*  CIARAN FARLEY
+    Rocket Data Logger
+    v 0.1
+*/
+
 #include <Wire.h>
 #include <Adafruit_MPL3115A2.h>
 #include <SPI.h>
@@ -14,8 +15,8 @@ const int cardSelect = 4;
 unsigned long time;
 
 void setup() {
-pinMode(LED_BUILTIN, OUTPUT);
-digitalWrite(LED_BUILTIN, LOW);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, LOW);
   
   Serial.begin(9600);
 
@@ -27,21 +28,23 @@ digitalWrite(LED_BUILTIN, LOW);
     // don't do anything more:
     while (1);
   }
+  
   Serial.println("card initialized.");
 
-//add headers to top of csv
- String dataLabel = "Time Sinse Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
+  //add headers to top of csv
+  String dataLabel = "Time Sinse Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
   File dataFile = SD.open("data.csv", FILE_WRITE);
+  
   if (dataFile) {
     dataFile.println(dataLabel);
     dataFile.close();
     Serial.println(dataLabel);
   }
-
 }
+
 void loop() {
 
-digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(LED_BUILTIN, HIGH);
   
   if (! baro.begin()) {
     Serial.println("Couldnt find sensor");
@@ -59,19 +62,20 @@ digitalWrite(LED_BUILTIN, HIGH);
 
   // open the file. note that only one file can be open at a time,
   // so you have to close this one before opening another.
+  
   File dataFile = SD.open("data.csv", FILE_WRITE);
 
   // if the file is available, write to it:
+  
   if (dataFile) {
     dataFile.println(dataString);
     dataFile.close();
     // print to the serial port too:
     Serial.println(dataString);
-  }
-  // if the file isn't open, pop up an error:
-  else {
+  } else {
     Serial.println("error opening data.csv");
   }
-digitalWrite(LED_BUILTIN, LOW);
+
+  digitalWrite(LED_BUILTIN, LOW);
   delay(100);
 }
