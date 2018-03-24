@@ -20,7 +20,6 @@ const int MILISECONDSPERSECOND = 1000;
 const int SECONDSPERMINUTE = 60;
 const int MINUTESPERHOUR = 60;
 
-
 unsigned long totalMillis;
 unsigned int currentMilliSeconds;
 unsigned long totalSeconds;
