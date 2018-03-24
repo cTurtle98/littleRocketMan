@@ -12,7 +12,8 @@ Adafruit_MPL3115A2 baro = Adafruit_MPL3115A2();
 
 const int cardSelect = 4;
 
-unsigned long time;
+unsigned long totalMillis;
+String time;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -55,7 +56,14 @@ void loop() {
   float pascals = baro.getPressure();
   float altm = baro.getAltitude();
   float tempc = baro.getTemperature();
-  long time = millis();
+  long totalMillis = millis();
+
+  if(totalMillis > 1000){
+    String time = (totalMillis / 1000 + ":" + totalMillis % 1000);
+  }
+  else{
+    String time = String(totalMillis);
+  }
 
   //log data string
   String dataString = String(time) + "," + String(pascals) + "," + String(altm) + "," + String(tempc);
