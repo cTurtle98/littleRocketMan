@@ -1,6 +1,6 @@
 /*  CIARAN FARLEY
     Rocket Data Logger
-    v 0.1
+    v 0.3
 
     HH = Hour in 2 digit format
     MM = minute in 2 digit format
@@ -79,7 +79,7 @@ void loop() {
   float tempc = baro.getTemperature();
   long totalMillis = millis();
   
-  //format time to look pretty with HH:MM:SS:MsMs
+  //format time to look pretty with HH:MM:SS.MsMsMs
   currentMilliSeconds = totalMillis % MILISECONDSPERSECOND;
   totalSeconds = totalMillis / MILISECONDSPERSECOND;
   currentSeconds = totalSeconds % SECONDSPERMINUTE;
@@ -135,7 +135,7 @@ void loop() {
     formattedHours = String(currentHours);
   }
 
-  time = (String(formattedHours) + ":" + String(formattedMinutes) + ":" + String(formattedSeconds) + ":" + String(formattedMilliSeconds));
+  time = (String(formattedHours) + ":" + String(formattedMinutes) + ":" + String(formattedSeconds) + "." + String(formattedMilliSeconds));
 
   //log data string
   String dataString = String(time) + "," + String(pascals) + "," + String(altm) + "," + String(tempc);
