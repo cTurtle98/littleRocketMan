@@ -35,6 +35,8 @@ String formattedMinutes;
 String formattedHours;
 String time;
 
+String dataLabel = "Time Sinse Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
+
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
@@ -53,7 +55,6 @@ void setup() {
   Serial.println("card initialized.");
 
   //add headers to top of csv
-  String dataLabel = "Time Sinse Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
   File dataFile = SD.open("data.csv", FILE_WRITE);
   
   if (dataFile) {
@@ -138,6 +139,11 @@ void loop() {
 
   //log data string
   String dataString = String(time) + "," + String(pascals) + "," + String(altm) + "," + String(tempc);
+
+  //add labels to the serial console every 10 seconds
+  if(currentMinutes % 10 == 0){
+    Serial.println(dataLabel);
+  }
 
   // open the file. note that only one file can be open at a time,
   // so you have to close this one before opening another.
