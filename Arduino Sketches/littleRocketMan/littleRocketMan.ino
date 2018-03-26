@@ -141,7 +141,7 @@ void loop() {
   String dataString = String(time) + "," + String(pascals) + "," + String(altm) + "," + String(tempc);
 
   //add labels to the serial console every 10 seconds
-  if(currentMinutes % 10 == 0){
+  if(currentSeconds % 10 == 0){
     Serial.println(dataLabel);
   }
 
