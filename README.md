@@ -2,6 +2,8 @@
 
 This is a depreciated old version, the new version is located on the [sccAerospaceClub Github](https://github.com/sccAerospaceClub/RocketTelemetry/tree/master/RocketFlightComputer)
 
+
+
 <del>
 this is a launch control and data logging system built on arduino for going into the nose cone of an estes rocket
 
