@@ -1,12 +1,11 @@
-/*  CIARAN FARLEY
-    Rocket Data Logger
-    v 0.3
+/*  
+ *  Ciaran Farley
+ *  Rocket Data Logger
+ */
 
-    HH = Hour in 2 digit format
-    MM = minute in 2 digit format
-    SS = second in 2 digit format
-    MsMs = miliseconds in 3 digit format
-*/
+/*
+ * Time is in standard "hour:minute:second.milisecond"
+ */
 
 #include <Wire.h>
 #include <Adafruit_MPL3115A2.h>
