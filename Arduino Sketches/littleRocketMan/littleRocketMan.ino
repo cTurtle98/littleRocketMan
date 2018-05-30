@@ -15,24 +15,6 @@
 Adafruit_MPL3115A2 baro = Adafruit_MPL3115A2();
 
 const int SDCARDPIN = 4;
-const int MILISECONDSPERSECOND = 1000;
-const int SECONDSPERMINUTE = 60;
-const int MINUTESPERHOUR = 60;
-
-unsigned long totalMillis;
-unsigned int currentMilliSeconds;
-unsigned long totalSeconds;
-unsigned int currentSeconds;
-unsigned long totalMinutes;
-unsigned int currentMinutes;
-unsigned long totalHours;
-unsigned long currentHours;
-
-String formattedMilliSeconds;
-String formattedSeconds;
-String formattedMinutes;
-String formattedHours;
-String time;
 
 String dataLabel = "Time Sinse Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
 
@@ -72,90 +54,35 @@ void loop() {
     return;
   }
 
-  //sensor strings
-  float pascals = baro.getPressure();
-  float altm = baro.getAltitude();
-  float tempc = baro.getTemperature();
-  long totalMillis = millis();
-  
-  //format time to look pretty with HH:MM:SS.MsMsMs
-  currentMilliSeconds = totalMillis % MILISECONDSPERSECOND;
-  totalSeconds = totalMillis / MILISECONDSPERSECOND;
-  currentSeconds = totalSeconds % SECONDSPERMINUTE;
-  totalMinutes = totalSeconds / SECONDSPERMINUTE;
-  currentMinutes = totalMinutes % MINUTESPERHOUR;
-  totalHours = totalMinutes / MINUTESPERHOUR;
-  currentHours = totalHours;
-
-  //add zero padding to milliseconds
-  if(currentMilliSeconds == 0){
-    formattedMilliSeconds = "000";
-  }
-  else if(currentMilliSeconds < 10){
-    formattedMilliSeconds = "00" + String(currentMilliSeconds);
-  }
-  else if(currentMilliSeconds < 100){
-    formattedMilliSeconds = "0" + String(currentMilliSeconds);
-  }
-  else{
-    formattedMilliSeconds = String(currentMilliSeconds);
-  }
-  
-  //add zero padding to seconds
-  if(currentSeconds == 0){
-    formattedSeconds = "00";
-  }
-  else if(currentSeconds < 10){
-    formattedSeconds = "0" + String(currentSeconds);
-  }
-  else{
-    formattedSeconds = String(currentSeconds);
-  }
-  
-  //add zero padding to minutes
-  if(currentMinutes == 0){
-    formattedMinutes = "00";
-  }
-  else if(currentMinutes < 10){
-    formattedMinutes = "0" + String(currentMinutes);
-  }
-  else{
-    formattedMinutes = String(currentMinutes);
-  }
-  
-  //add zero padding to hours
-  if(currentHours == 0){
-    formattedHours = "00";
-  }
-  if(currentHours < 10){
-    formattedHours = "0" + String(currentHours);
-  }
-  else{
-    formattedHours = String(currentHours);
-  }
-
-  time = (String(formattedHours) + ":" + String(formattedMinutes) + ":" + String(formattedSeconds) + "." + String(formattedMilliSeconds));
-
-  //log data string
-  String dataString = String(time) + "," + String(pascals) + "," + String(altm) + "," + String(tempc);
-
-  //add labels to the serial console every 10 seconds
-  if(currentSeconds % 10 == 0){
-    Serial.println(dataLabel);
-  }
-
-  // open the file. note that only one file can be open at a time,
-  // so you have to close this one before opening another.
-  
   File dataFile = SD.open("data.csv", FILE_WRITE);
 
-  // if the file is available, write to it:
-
-  // print to the serial port:
-  Serial.println(dataString);
-  
   if (dataFile) {
-    dataFile.println(dataString);
+    
+    Serial.print(millis());
+    dataFile.print(millis());
+    Serial.print(",");
+    dataFile.print(",");
+    Serial.print();
+    dataFile.print();
+    Serial.print(",");
+    dataFile.print(",");
+    Serial.print(baro.getPressure());
+    dataFile.print(baro.getPressure());
+    Serial.print(",");
+    dataFile.print(",");
+    Serial.print(baro.getAltitude());
+    dataFile.print(baro.getAltitude());
+    Serial.print(",");
+    dataFile.print(",");
+    Serial.print(baro.getTemperature());
+    dataFile.print(baro.getTemperature();
+    Serial.println();
+    dataFile.println();
+    
+    //add labels to the serial console every 10 seconds
+    if(currentSeconds % 10 == 0){
+      Serial.println(dataLabel);
+    }
     dataFile.close();
   } else {
     Serial.println("error opening data.csv");
