@@ -3,10 +3,6 @@
  *  Rocket Data Logger
  */
 
-/*
- * Time is in standard "hour:minute:second.milisecond"
- */
-
 #include <Wire.h>
 #include <Adafruit_MPL3115A2.h>
 #include <SPI.h>
@@ -48,16 +44,20 @@ void setup() {
 void loop() {
 
   digitalWrite(LED_BUILTIN, HIGH);
+
+Serial.println("LOOP STARTED");
   
   if (! baro.begin()) {
     Serial.println("Couldnt find sensor");
     return;
   }
 
+Serial.println("BARO BEGIN FINISHED");
+
   File dataFile = SD.open("data.csv", FILE_WRITE);
 
   if (dataFile) {
-
+    
     Serial.println("");
     dataFile.println("");
     Serial.print(millis());
