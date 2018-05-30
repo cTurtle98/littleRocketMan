@@ -62,34 +62,36 @@ Serial.println("BARO BEGIN FINISHED");
   Serial.println("FILE OPENED");
 
   if (dataFile) {
-    
-    Serial.println("");
-    dataFile.println("");
-    
+
     Serial.print(millis());
     dataFile.print(millis());
     Serial.print(",");
     dataFile.print(",");
+    dataFile.flush();
     
     Serial.print("");
     dataFile.print("");
     Serial.print(",");
     dataFile.print(",");
+    dataFile.flush();
     
     Serial.print(baro.getPressure());
     dataFile.print(baro.getPressure());
     Serial.print(",");
     dataFile.print(",");
+    dataFile.flush();
     
     Serial.print(baro.getAltitude());
     dataFile.print(baro.getAltitude());
     Serial.print(",");
     dataFile.print(",");
+    dataFile.flush();
     
     Serial.print(baro.getTemperature());
     dataFile.print(baro.getTemperature());
     Serial.print(",");
     dataFile.print(",");
+    dataFile.flush();
     
     Serial.println("");
     dataFile.println("");
