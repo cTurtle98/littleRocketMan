@@ -41,7 +41,7 @@ void setup() {
   if (dataFile) {
     dataFile.println(dataLabel);
     dataFile.close();
-    Serial.println(dataLabel);
+    Serial.println("DATA LABEL IN FILE");
   }
 }
 
@@ -59,29 +59,38 @@ Serial.println("LOOP STARTED");
 Serial.println("BARO BEGIN FINISHED");
 
   File dataFile = SD.open("data.csv", FILE_WRITE);
+  Serial.println("FILE OPENED");
 
   if (dataFile) {
     
     Serial.println("");
     dataFile.println("");
+    
     Serial.print(millis());
     dataFile.print(millis());
     Serial.print(",");
     dataFile.print(",");
+    
     Serial.print("");
     dataFile.print("");
     Serial.print(",");
     dataFile.print(",");
+    
     Serial.print(baro.getPressure());
     dataFile.print(baro.getPressure());
     Serial.print(",");
     dataFile.print(",");
+    
     Serial.print(baro.getAltitude());
     dataFile.print(baro.getAltitude());
     Serial.print(",");
     dataFile.print(",");
+    
     Serial.print(baro.getTemperature());
     dataFile.print(baro.getTemperature());
+    Serial.print(",");
+    dataFile.print(",");
+    
     Serial.println("");
     dataFile.println("");
     Serial.println("DATA PRINT COMPLETE");
