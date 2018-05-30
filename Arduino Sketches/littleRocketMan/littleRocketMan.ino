@@ -16,9 +16,9 @@ File dataFile = SD.open("data.csv", FILE_WRITE); //name of file on sd card
 long time = 0;
 long lastTime = 0;
 long timeDelta = 0;
-float pascals = 0;
-float altm = 0;
-float tempc = 0;
+float pascals = 0; //mpl3115a2 pressure
+float altm = 0; //mpl3115a2 altitude
+float tempc = 0; //mpl3115a2 temp
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -52,45 +52,45 @@ void setup() {
 
 void loop() {
 
-  digitalWrite(LED_BUILTIN, HIGH);
-
-  //sensor values
+  //save sensor values to variables
   pascals = baro.getPressure();
   altm = baro.getAltitude();
   tempc = baro.getTemperature();
   time = millis();
   timeDelta = time - lastTime;
 
-//  Serial.print(time);
-//  dataFile.print(time);
-//  Serial.print(",");
-//  dataFile.print(",");
+  digitalWrite(LED_BUILTIN, HIGH);
+  
+  Serial.print(time);
+  dataFile.print(time);
+  Serial.print(",");
+  dataFile.print(",");
   
   Serial.print(timeDelta);
-//  dataFile.print(timeDelta);
-//  Serial.print(",");
-//  dataFile.print(",");
+  dataFile.print(timeDelta);
+  Serial.print(",");
+  dataFile.print(",");
   
-//  Serial.print(pascals);
-//  dataFile.print(pascals);
-//  Serial.print(",");
-//  dataFile.print(",");
+  Serial.print(pascals);
+  dataFile.print(pascals);
+  Serial.print(",");
+  dataFile.print(",");
   
-//  Serial.print(altm);
-//  dataFile.print(altm);
-//  Serial.print(",");
-//  dataFile.print(",");
+  Serial.print(altm);
+  dataFile.print(altm);
+  Serial.print(",");
+  dataFile.print(",");
   
-//  Serial.print(tempc);
-//  dataFile.print(tempc);
-//  Serial.print(",");
-//  dataFile.print(",");
+  Serial.print(tempc);
+  dataFile.print(tempc);
+  Serial.print(",");
+  dataFile.print(",");
   
   Serial.println("");
-//  dataFile.println("");
+  dataFile.println("");
   
   dataFile.flush();
 
-  lastTime = time;
+  lastTime = time;//save the current time to last time for delta
   digitalWrite(LED_BUILTIN, LOW);
 }
