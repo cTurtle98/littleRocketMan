@@ -11,9 +11,7 @@
 Adafruit_MPL3115A2 baro = Adafruit_MPL3115A2();
 
 const int SDCARDPIN = 4;
-
 long lastTime = 0;
-
 String dataLabel = "Time Since Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
 
 void setup() {
@@ -22,20 +20,23 @@ void setup() {
   
   Serial.begin(9600);
   
-  Serial.print("Initializing SD card...");
-
   // see if the card is present and can be initialized:
+  Serial.print("Initializing SD card...");
   if (!SD.begin(SDCARDPIN)) {
     Serial.println("Card failed, or not present");
     // don't do anything more:
     while (1);
   }
-  
   Serial.println("card initialized.");
+
+  //check if mpl3115a2 sensor exists
+  if (! baro.begin()) {
+    Serial.println("Couldnt find sensor");
+    return;
+  }
 
   //add headers to top of csv
   File dataFile = SD.open("data.csv", FILE_WRITE);
-  
   if (dataFile) {
     dataFile.println("");
     dataFile.println(dataLabel);
@@ -47,11 +48,6 @@ void setup() {
 void loop() {
 
   digitalWrite(LED_BUILTIN, HIGH);
-  
-  if (! baro.begin()) {
-    Serial.println("Couldnt find sensor");
-    return;
-  }
 
   //sensor values
   float pascals = baro.getPressure();
