@@ -58,40 +58,36 @@ void loop() {
   
   File dataFile = SD.open("data.csv", FILE_WRITE);
 
-  if (dataFile) {
+  Serial.print(time);
+  dataFile.print(time);
+  Serial.print(",");
+  dataFile.print(",");
+  
+  Serial.print(timeDelta);
+  dataFile.print("");
+  Serial.print(",");
+  dataFile.print(",");
+  
+  Serial.print(pascals);
+  dataFile.print(pascals);
+  Serial.print(",");
+  dataFile.print(",");
+  
+  Serial.print(altm);
+  dataFile.print(altm);
+  Serial.print(",");
+  dataFile.print(",");
+  
+  Serial.print(tempc);
+  dataFile.print(tempc);
+  Serial.print(",");
+  dataFile.print(",");
+  
+  Serial.println("");
+  dataFile.println("");
+  
+  dataFile.close();
 
-    Serial.print(time);
-    dataFile.print(time);
-    Serial.print(",");
-    dataFile.print(",");
-    
-    Serial.print(timeDelta);
-    dataFile.print("");
-    Serial.print(",");
-    dataFile.print(",");
-    
-    Serial.print(pascals);
-    dataFile.print(pascals);
-    Serial.print(",");
-    dataFile.print(",");
-    
-    Serial.print(altm);
-    dataFile.print(altm);
-    Serial.print(",");
-    dataFile.print(",");
-    
-    Serial.print(tempc);
-    dataFile.print(tempc);
-    Serial.print(",");
-    dataFile.print(",");
-    
-    Serial.println("");
-    dataFile.println("");
-    
-    dataFile.close();
-  } else {
-    Serial.println("error opening data.csv");
-  }
   lastTime = time;
   digitalWrite(LED_BUILTIN, LOW);
 }
