@@ -56,16 +56,22 @@ Serial.println("LOOP STARTED");
     Serial.println("Couldnt find sensor");
     return;
   }
+  Serial.println("BARO BEGIN FINISHED");
 
-Serial.println("BARO BEGIN FINISHED");
-
+  
+  //sensor strings
+  float pascals = baro.getPressure();
+  float altm = baro.getAltitude();
+  float tempc = baro.getTemperature();
+  long time = millis();
+  
   File dataFile = SD.open("data.csv", FILE_WRITE);
   Serial.println("FILE OPENED");
 
   if (dataFile) {
 
-    Serial.print(millis());
-    dataFile.print(millis());
+    Serial.print(time);
+    dataFile.print(time);
     Serial.print(",");
     dataFile.print(",");
     dataFile.flush();
@@ -76,20 +82,20 @@ Serial.println("BARO BEGIN FINISHED");
     dataFile.print(",");
     dataFile.flush();
     
-    Serial.print(baro.getPressure());
-    dataFile.print(baro.getPressure());
+    Serial.print(pascals);
+    dataFile.print(pascals);
     Serial.print(",");
     dataFile.print(",");
     dataFile.flush();
     
-    Serial.print(baro.getAltitude());
-    dataFile.print(baro.getAltitude());
+    Serial.print(altm);
+    dataFile.print(altm);
     Serial.print(",");
     dataFile.print(",");
     dataFile.flush();
     
-    Serial.print(baro.getTemperature());
-    dataFile.print(baro.getTemperature());
+    Serial.print(tempc);
+    dataFile.print(tempc);
     Serial.print(",");
     dataFile.print(",");
     dataFile.flush();
