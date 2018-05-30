@@ -41,6 +41,7 @@ void setup() {
   if (dataFile) {
     dataFile.println("");
     dataFile.println(dataLabel);
+    Serial.println(dataLabel);
     dataFile.close();
   }
 }
@@ -68,38 +69,33 @@ void loop() {
     dataFile.print(time);
     Serial.print(",");
     dataFile.print(",");
-    dataFile.flush();
     
     Serial.print("");
     dataFile.print("");
     Serial.print(",");
     dataFile.print(",");
-    dataFile.flush();
     
     Serial.print(pascals);
     dataFile.print(pascals);
     Serial.print(",");
     dataFile.print(",");
-    dataFile.flush();
     
     Serial.print(altm);
     dataFile.print(altm);
     Serial.print(",");
     dataFile.print(",");
-    dataFile.flush();
     
     Serial.print(tempc);
     dataFile.print(tempc);
     Serial.print(",");
     dataFile.print(",");
-    dataFile.flush();
     
     Serial.println("");
     dataFile.println("");
+    
     dataFile.close();
   } else {
     Serial.println("error opening data.csv");
   }
   digitalWrite(LED_BUILTIN, LOW);
-  delay(500);
 }
