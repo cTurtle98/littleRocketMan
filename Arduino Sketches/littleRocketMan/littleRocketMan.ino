@@ -13,6 +13,7 @@ Adafruit_MPL3115A2 baro = Adafruit_MPL3115A2();
 const int SDCARDPIN = 4;
 long lastTime = 0;
 String dataLabel = "Time Since Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
+File dataFile = SD.open("data.csv", FILE_WRITE);
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -36,12 +37,11 @@ void setup() {
   }
 
   //add headers to top of csv
-  File dataFile = SD.open("data.csv", FILE_WRITE);
   if (dataFile) {
     dataFile.println("");
     dataFile.println(dataLabel);
     Serial.println(dataLabel);
-    dataFile.close();
+    dataFile.flush();
   }
 }
 
@@ -55,38 +55,36 @@ void loop() {
   float tempc = baro.getTemperature();
   long time = millis();
   long timeDelta = time - lastTime;
-  
-  File dataFile = SD.open("data.csv", FILE_WRITE);
 
-  Serial.print(time);
-  dataFile.print(time);
-  Serial.print(",");
-  dataFile.print(",");
+//  Serial.print(time);
+//  dataFile.print(time);
+//  Serial.print(",");
+//  dataFile.print(",");
   
   Serial.print(timeDelta);
-  dataFile.print("");
-  Serial.print(",");
-  dataFile.print(",");
+//  dataFile.print(timeDelta);
+//  Serial.print(",");
+//  dataFile.print(",");
   
-  Serial.print(pascals);
-  dataFile.print(pascals);
-  Serial.print(",");
-  dataFile.print(",");
+//  Serial.print(pascals);
+//  dataFile.print(pascals);
+//  Serial.print(",");
+//  dataFile.print(",");
   
-  Serial.print(altm);
-  dataFile.print(altm);
-  Serial.print(",");
-  dataFile.print(",");
+//  Serial.print(altm);
+//  dataFile.print(altm);
+//  Serial.print(",");
+//  dataFile.print(",");
   
-  Serial.print(tempc);
-  dataFile.print(tempc);
-  Serial.print(",");
-  dataFile.print(",");
+//  Serial.print(tempc);
+//  dataFile.print(tempc);
+//  Serial.print(",");
+//  dataFile.print(",");
   
   Serial.println("");
-  dataFile.println("");
+//  dataFile.println("");
   
-  dataFile.close();
+  dataFile.flush();
 
   lastTime = time;
   digitalWrite(LED_BUILTIN, LOW);
