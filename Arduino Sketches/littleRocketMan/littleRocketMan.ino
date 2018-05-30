@@ -20,6 +20,10 @@ void setup() {
   
   Serial.begin(9600);
 
+  while (!Serial) {
+    ;
+  }
+  
   Serial.print("Initializing SD card...");
 
   // see if the card is present and can be initialized:
@@ -78,16 +82,15 @@ Serial.println("BARO BEGIN FINISHED");
     dataFile.print(",");
     Serial.print(baro.getTemperature());
     dataFile.print(baro.getTemperature());
-    
-    //add labels to the serial console every 10 seconds
-    if(millis() % 10000 == 0){
-      Serial.println(dataLabel);
-    }
+    Serial.println("");
+    dataFile.println("");
+    Serial.println("DATA PRINT COMPLETE");
     dataFile.close();
+    Serial.println("DATA FILE CLOSED");
   } else {
     Serial.println("error opening data.csv");
   }
-
+Serial.println("DATA LOOP COMPLETE");
   digitalWrite(LED_BUILTIN, LOW);
-  delay(50);
+  delay(500);
 }
