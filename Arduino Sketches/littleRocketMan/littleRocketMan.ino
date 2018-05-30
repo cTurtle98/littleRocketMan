@@ -57,13 +57,15 @@ void loop() {
   File dataFile = SD.open("data.csv", FILE_WRITE);
 
   if (dataFile) {
-    
+
+    Serial.println("");
+    dataFile.println("");
     Serial.print(millis());
     dataFile.print(millis());
     Serial.print(",");
     dataFile.print(",");
-    Serial.print();
-    dataFile.print();
+    Serial.print("");
+    dataFile.print("");
     Serial.print(",");
     dataFile.print(",");
     Serial.print(baro.getPressure());
@@ -75,12 +77,10 @@ void loop() {
     Serial.print(",");
     dataFile.print(",");
     Serial.print(baro.getTemperature());
-    dataFile.print(baro.getTemperature();
-    Serial.println();
-    dataFile.println();
+    dataFile.print(baro.getTemperature());
     
     //add labels to the serial console every 10 seconds
-    if(currentSeconds % 10 == 0){
+    if(millis() % 10000 == 0){
       Serial.println(dataLabel);
     }
     dataFile.close();
