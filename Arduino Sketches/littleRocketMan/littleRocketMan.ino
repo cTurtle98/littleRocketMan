@@ -12,7 +12,7 @@ Adafruit_MPL3115A2 baro = Adafruit_MPL3115A2();
 
 const int SDCARDPIN = 4;
 
-String dataLabel = "Time Sinse Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
+String dataLabel = "Time Since Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -39,6 +39,7 @@ void setup() {
   File dataFile = SD.open("data.csv", FILE_WRITE);
   
   if (dataFile) {
+    dataFile.println("");
     dataFile.println(dataLabel);
     dataFile.close();
     Serial.println("DATA LABEL IN FILE");
