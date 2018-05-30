@@ -10,10 +10,15 @@
 
 Adafruit_MPL3115A2 baro = Adafruit_MPL3115A2();
 
-const int SDCARDPIN = 4;
+const int SDCARDPIN = 4;//pin for sd card
+String dataLabel = "Time Since Boot,Pressure(Pascals),Altitude(Meters),Temp(C)"; //label for top of csv
+File dataFile = SD.open("data.csv", FILE_WRITE); //name of file on sd card  
+long time = 0;
 long lastTime = 0;
-String dataLabel = "Time Since Boot,Pressure(Pascals),Altitude(Meters),Temp(C)";
-File dataFile = SD.open("data.csv", FILE_WRITE);
+long timeDelta = 0;
+float pascals = 0;
+float altm = 0;
+float tempc = 0;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -50,11 +55,11 @@ void loop() {
   digitalWrite(LED_BUILTIN, HIGH);
 
   //sensor values
-  float pascals = baro.getPressure();
-  float altm = baro.getAltitude();
-  float tempc = baro.getTemperature();
-  long time = millis();
-  long timeDelta = time - lastTime;
+  pascals = baro.getPressure();
+  altm = baro.getAltitude();
+  tempc = baro.getTemperature();
+  time = millis();
+  timeDelta = time - lastTime;
 
 //  Serial.print(time);
 //  dataFile.print(time);
