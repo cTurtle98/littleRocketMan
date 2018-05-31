@@ -11,7 +11,7 @@
 Adafruit_MPL3115A2 baro = Adafruit_MPL3115A2();
 
 const int SDCARDPIN = 4;//pin for sd card
-String dataLabel = "Time Since Boot,Pressure(Pascals),Altitude(Meters),Temp(C)"; //label for top of csv
+String dataLabel = "Time Since Boot,Data Rate,Pressure(Pascals),Altitude(Meters),Temp(C)"; //label for top of csv
 File dataFile = SD.open("data.csv", FILE_WRITE); //name of file on sd card  
 long time = 0;
 long lastTime = 0;
