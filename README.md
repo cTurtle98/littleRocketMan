@@ -2,7 +2,7 @@
 
 Arduino based "flight recorder" initially designed to be used for estes rockets but expanded for use in other aerospace projects
 
-used for data collection by the Cabrillo Aerospace Club
+used for data collection by the Cabrillo Aerospace Club  
   Years: SP18
 
 ## Hardware
