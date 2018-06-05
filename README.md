@@ -1,6 +1,9 @@
 # littleRocketMan
 
-this is a launch control and data logging system built on arduino for going into the nose cone of an estes rocket
+Arduino based "flight recorder" initially designed to be used for estes rockets but expanded for use in other aerospace projects
+
+used for data collection by the Cabrillo Aerospace Club
+  Years: SP18
 
 ## Hardware
 * Adafruit feather m0 Adalogger with a 32gb sd card
